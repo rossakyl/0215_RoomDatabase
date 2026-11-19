@@ -34,8 +34,8 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.pertemuan9.viewmodel.DetailSiswaUiState
-import com.example.pertemuan9.viewmodel.DetailViewModel
+import com.example.roomdatabase.viewmodel.DetailSiswaUiState
+import com.example.roomdatabase.viewmodel.DetailViewModel
 import com.example.roomdatabase.R
 import com.example.roomdatabase.room.Siswa
 import com.example.roomdatabase.uicontroller.DestinasiDetailSiswa
