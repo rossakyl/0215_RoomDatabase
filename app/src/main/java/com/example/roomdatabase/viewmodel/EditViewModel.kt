@@ -20,13 +20,29 @@ class EditViewModel (
         private set
 
     private val idSiswa: Int = checkNotNull(savedStateHandle[DestinasiEditSiswa.itemIdArg])
+        init{
+            viewModelScope.launch {
+                uiStateSiswa = repositoriSiswa.getSiswaStream(idSiswa)
+                    .filterNotNull()
+                    .first()
+                    .toUIStateSiswa(true)
+            }
+        }
 
-    init {
-        viewModelScope.launch {
-            uiStateSiswa = repositoriSiswa.getSiswaStream(idSiswa)
-                .filterNotNull()
-                .first()
-                .toUIStateSiswa(true)
+    fun updateUiState(detailSiswa: DetailSiswa) {
+        uiStateSiswa =
+            UIStateSiswa(detailSiswa = detailSiswa, isEntryValid = validasiInput(detailSiswa))
+    }
+
+    private fun validasiInput(uiState: DetailSiswa = uiStateSiswa.detailSiswa ): Boolean {
+        return with(uiState) {
+            nama.isNotBlank() && alamat.isNotBlank() && telpon.isNotBlank()
+        }
+    }
+
+    suspend fun updateSiswa() {
+        if (validasiInput(uiStateSiswa.detailSiswa)) {
+            repositoriSiswa.updateSiswa(uiStateSiswa.detailSiswa.toSiswa())
         }
     }
 }
