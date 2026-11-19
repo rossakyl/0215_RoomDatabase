@@ -1,9 +1,11 @@
 package com.example.roomdatabase.viewmodel
 
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import com.example.pertemuan9.viewmodel.DetailViewModel
 import com.example.roomdatabase.AplikasiSiswa
 
 object PenyediaViewModel {
@@ -14,6 +16,14 @@ object PenyediaViewModel {
         initializer {
             EntryViewModel(aplikasiSiswa().container.repositoriSiswa)
         }
+        //edit : tambah intializer untuk DetailViewModel dan EditViewModel
+        initializer {
+            DetailViewModel(
+                this.createSavedStateHandle(),
+                aplikasiSiswa().container.repositoriSiswa
+            )
+        }
+
     }
 }
 
